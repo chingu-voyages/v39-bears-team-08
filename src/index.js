@@ -1,3 +1,8 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+// Activate jquery or popper is need it
+// import $ from 'jquery';
+// import Popper from 'popper.js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

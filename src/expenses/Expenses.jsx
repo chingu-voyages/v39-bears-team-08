@@ -5,7 +5,9 @@ const Expenses = () => {
 
     return(
         <form>
-            
+            <label>Groceries  
+                <input type="text" />
+            </label>
         </form>
     );
 };
