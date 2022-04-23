@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 
 const Expenses = () => {
@@ -8,7 +8,12 @@ const Expenses = () => {
         <> 
             <Container>
                 <Row>
-                    <Col> 
+                    <Col lg={3} md={3} sm={5} className='p-4 m-auto shadow-sm rounded-lg'>
+                    <DropdownButton className='p-3 mb-3'id="budget-allocated" title="Budget Allocated">
+                        <Dropdown.Item href="#/action-1">Expenses Name Here</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">Expenses Name Here</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">Expenses Name Here</Dropdown.Item>
+                    </DropdownButton>
                         <Form>
                             <Form.Group className="mb-3" controlId="groceries">
                                 <Form.Label>Groceries</Form.Label>
