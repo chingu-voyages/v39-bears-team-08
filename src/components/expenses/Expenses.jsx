@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {useState } from 'react'
 import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 
 
 const Expenses = () => {
+    const initialValues = {
+        groceries: 0,
+        restaurant: 0,
+        barcafe: 0,
+        rent: 0,
+        utilities: 0,
+        insurance: 0,
+        fuel: 0,
+        entertaiment: 0,
+        communication: 0,
+        total: 0
+    }
+    
+    const [inputsValue, setInputsValue] = useState(initialValues)
 
     return(
         <> 
