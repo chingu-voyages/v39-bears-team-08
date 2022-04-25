@@ -27,6 +27,31 @@ const Expenses = () => {
         })
     }
 
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        const groceries = inputsValue.groceries
+        const restaurant = inputsValue.restaurant
+        const barCafe = inputsValue.barcafe
+        const rent = inputsValue.rent
+        const utilities = inputsValue.utilities
+        const insurance = inputsValue.insurance
+        const fuel = inputsValue.fuel
+        const entertaiment = inputsValue.entertaiment
+        const communication = inputsValue.communication
+        const total = inputsValue.total
+        
+        console.log(groceries)
+        console.log(restaurant)
+        console.log(barCafe)
+        console.log(rent)
+        console.log(utilities)
+        console.log(insurance)
+        console.log(fuel)
+        console.log(entertaiment)
+        console.log(communication)
+        console.log(total)
+    }
+
     return(
         <> 
             <Container>
@@ -37,7 +62,7 @@ const Expenses = () => {
                         <Dropdown.Item href="#/action-2">Expenses Name Here</Dropdown.Item>
                         <Dropdown.Item href="#/action-3">Expenses Name Here</Dropdown.Item>
                     </DropdownButton>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="groceries">
                                 <Form.Label>Groceries</Form.Label>
                                 <Form.Control type="number" placeholder="Groceries" value={inputsValue.groceries} onChange={handleInputChange} name="groceries" />
@@ -76,7 +101,7 @@ const Expenses = () => {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="total">
                                 <Form.Label>Total</Form.Label>
-                                <Form.Control type="number" placeholder="Total" value={inputsValue.total} onChange={handleInputChange} namne="total" />
+                                <Form.Control type="number" placeholder="Total" value={inputsValue.total} onChange={handleInputChange} name="total" />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">Save</Button>

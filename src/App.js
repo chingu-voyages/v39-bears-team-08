@@ -1,6 +1,5 @@
 import React from 'react'
 import Expenses from "./components/expenses/Expenses";
-import logo from "./logo.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
