@@ -1,0 +1,28 @@
+.budget-page {
+  width: 95%;
+  margin: 10px auto;
+  border: 1px solid black;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.budget {
+  display: flex;
+  border: 1px solid black;
+
+  min-height: 200px;
+  flex-direction: column;
+  padding: 10px;
+  align-items: flex-start;
+  width: 95%;
+  margin: 60px auto;
+}
