@@ -18,6 +18,15 @@ const Expenses = () => {
     
     const [inputsValue, setInputsValue] = useState(initialValues)
 
+    const handleInputChange = (e) => {
+        const {name, value} = e.target
+        
+        setInputsValue({
+            ...inputsValue,
+            [name]: value
+        })
+    }
+
     return(
         <> 
             <Container>
@@ -31,43 +40,43 @@ const Expenses = () => {
                         <Form>
                             <Form.Group className="mb-3" controlId="groceries">
                                 <Form.Label>Groceries</Form.Label>
-                                <Form.Control type="number" placeholder="Groceries" value={inputsValue.groceries} />
+                                <Form.Control type="number" placeholder="Groceries" value={inputsValue.groceries} onChange={handleInputChange} name="groceries" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="restaurant">
                                 <Form.Label>Restaurant</Form.Label>
-                                <Form.Control type="number" placeholder="Restaurant" value={inputsValue.restaurant} />
+                                <Form.Control type="number" placeholder="Restaurant" value={inputsValue.restaurant} onChange={handleInputChange} name="restaurant" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="bar-cafe">
                                 <Form.Label>Bar/Cafe</Form.Label>
-                                <Form.Control type="number" placeholder="Bar/Cafe" value={inputsValue.barcafe}/>
+                                <Form.Control type="number" placeholder="Bar/Cafe" value={inputsValue.barcafe} onChange={handleInputChange} name="barcafe" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="rent">
                                 <Form.Label>Rent</Form.Label>
-                                <Form.Control type="number" placeholder="Rent" value={inputsValue.rent} />
+                                <Form.Control type="number" placeholder="Rent" value={inputsValue.rent} onChange={handleInputChange} name="rent" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="utilities">
                                 <Form.Label>Utilities</Form.Label>
-                                <Form.Control type="number" placeholder="Utilities" value={inputsValue.utilities} />
+                                <Form.Control type="number" placeholder="Utilities" value={inputsValue.utilities}onChange={handleInputChange} name="utilities" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="insurance">
                                 <Form.Label>Insurance</Form.Label>
-                                <Form.Control type="number" placeholder="Insurance" value={inputsValue.insurance} />
+                                <Form.Control type="number" placeholder="Insurance" value={inputsValue.insurance} onChange={handleInputChange} name="insurance" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="fuel">
                                 <Form.Label>Fuel</Form.Label>
-                                <Form.Control type="number" placeholder="Fuel" value={inputsValue.fuel} />
+                                <Form.Control type="number" placeholder="Fuel" value={inputsValue.fuel} onChange={handleInputChange} name="fuel" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="entertaiment">
                                 <Form.Label>Entertaiment</Form.Label>
-                                <Form.Control type="number" placeholder="Entertaiment" value={inputsValue.entertaiment} />
+                                <Form.Control type="number" placeholder="Entertaiment" value={inputsValue.entertaiment} onChange={handleInputChange} name="entertaiment" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="communication">
                                 <Form.Label>Communication</Form.Label>
-                                <Form.Control type="number" placeholder="Communication" value={inputsValue.communication} />
+                                <Form.Control type="number" placeholder="Communication" value={inputsValue.communication} onChange={handleInputChange} name="communication" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="total">
                                 <Form.Label>Total</Form.Label>
-                                <Form.Control type="number" placeholder="Total" value={inputsValue.total} />
+                                <Form.Control type="number" placeholder="Total" value={inputsValue.total} onChange={handleInputChange} namne="total" />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">Save</Button>
