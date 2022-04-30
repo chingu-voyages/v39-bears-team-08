@@ -37,8 +37,27 @@ const ExpensesChart = () =>{
                           borderWidth: 0.5,
                         },
                       ],
-                }}
-            />
-        </div>
+                    }}
+                    height={400}
+                    width={600}
+                    options={{
+                     maintainAspectRatio: false,
+                     scales: {
+                     yAxes: [
+                        {
+                        ticks: {
+                            beginAtZero: true,
+                            },
+                        },
+                    ],
+                },
+                legend: {
+                    labels: {
+                        fontSize: 25,
+                    },
+                },
+            }}
+        />
+    </div>
     )
 }
