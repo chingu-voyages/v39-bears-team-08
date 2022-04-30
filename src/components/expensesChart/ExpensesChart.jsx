@@ -61,3 +61,5 @@ const ExpensesChart = () =>{
     </div>
     )
 }
+
+export default ExpensesChart
