@@ -1,6 +1,7 @@
 import React from "react";
 import "./BudgetPage.css";
 import { Link } from "react-router-dom";
+import ExpensesChart from "../../components/expensesChart/ExpensesChart";
 
 export default function BudgetPage() {
   return (
@@ -35,6 +36,7 @@ export default function BudgetPage() {
           </select>
         </div>
       </div>
+      <ExpensesChart />
     </div>
   );
 }
