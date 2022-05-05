@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
+import "./createBudget.css";
 
 
     const NewBudget = () => {
@@ -41,8 +42,13 @@ import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'rea
     return(
         <>
             <Container>
+                <div class="pt-2">
+                    <header class="header p-2 justify-content-right">
+                        <h1>New Budget</h1>
+                    </header>
+                </div>
                 <Row>
-                    <Col lg={3} md={3} sm={5} className='p-4 m-auto shadow-sm rounded-lg'>
+                    <Col lg={3} md={3} sm={5} className='p-4 pt-2 m-auto shadow-sm rounded-lg'>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="budgetName">
                                 <Form.Label>Budget Name</Form.Label>
@@ -78,4 +84,4 @@ import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'rea
     );
 }
 
-export default NewBudget();
+export default NewBudget;
