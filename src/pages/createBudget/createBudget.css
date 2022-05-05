@@ -1,0 +1,23 @@
+.newBudget-page {
+    width: 95%;
+    margin: 10px auto;
+    border: 1px solid black;
+    height: 100vh;
+  }
+
+.header {
+    display: flex;
+    font: Verdana;
+    text-decoration-color: #FFFFFF ;
+    background-color: #CBE0B2 ;
+    justify-content: space-between;
+  }
+
+.button {
+    background-color: #4D8C8C;
+}
+
+.button:hover {
+    background-color:  #164C4C;
+    /* color: white; */
+  }
