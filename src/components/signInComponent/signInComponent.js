@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../../Context";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // test login
 // ray@gmail.com
@@ -12,6 +13,7 @@ export default function SignInComponent() {
   const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
     useContext(Context);
 
+  let navigate = useNavigate();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -22,6 +24,7 @@ export default function SignInComponent() {
 
   const onformSubmit = (e) => {
     e.preventDefault();
+
     axios
       .post("http://localhost:5000/login", {
         email: email,
@@ -30,16 +33,16 @@ export default function SignInComponent() {
       .then((res) => {
         console.log(res);
         setIsLoggedIn(true);
-        console.log('line 33 from signin',res.data);
+        console.log("line 33 from signin", res.data);
         setUserData(res.data);
-         window.location.replace('/budgetpage');
+
+        navigate("/budgetpage");
       })
       .catch((err) => {
-        console.log('line 37');
+        console.log("line 37");
         console.log(err);
         return;
       });
-
 
     console.log("sub");
   };

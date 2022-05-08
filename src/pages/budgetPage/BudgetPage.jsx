@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./BudgetPage.css";
 import { Link } from "react-router-dom";
 import ExpensesChart from "../../components/expensesChart/ExpensesChart";
+import { Context } from "../../Context";
+import { useNavigate } from "react-router-dom";
 
 export default function BudgetPage() {
+  const { isLoggedIn, userData } = useContext(Context);
+  let navigate = useNavigate();
+
+  const loginHandler = () => {
+    if (isLoggedIn) {
+      window.location.reload();
+    } else {
+      navigate("/");
+    }
+  };
+
+  const signUp = () => {
+    navigate("/createUser");
+  };
+
+  console.log(isLoggedIn);
+
   return (
     <div className="budget-page">
       <header className="header">
@@ -12,7 +31,10 @@ export default function BudgetPage() {
         </div>
         <div className="right-side">
           <h2>Welcome User</h2>
-          <button>Log Out</button>
+          <button onClick={loginHandler}>
+            {isLoggedIn ? "Sign out" : "Sign in"}
+          </button>
+          <button onClick={signUp}>{isLoggedIn ? null : "Sign Up"}</button>
         </div>
       </header>
 
