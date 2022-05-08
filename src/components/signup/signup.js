@@ -43,7 +43,7 @@ export default function SignUp() {
         window.location.replace('/budgetpage');
       })
       .catch((err) => {
-        console.log(err);
+        console.log('line 46:',err);
       });
 
     console.log('sub');

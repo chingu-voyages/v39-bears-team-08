@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import "./createBudget.css";
+import { Context } from "../../Context.js";
 
 
     const NewBudget = () => {
@@ -14,6 +15,9 @@ import "./createBudget.css";
 
         const [inputsValue, setInputsValue] = useState(initialValues)
 
+        const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
+    useContext(Context);
+
         const handleInputChange = (e) => {
             const {name, value} = e.target
 
@@ -23,6 +27,7 @@ import "./createBudget.css";
             })
         }
 
+
         const handleSubmit = (e) =>{
             e.preventDefault()
             const budgetName = inputsValue.budgetName
@@ -31,12 +36,33 @@ import "./createBudget.css";
             const endDate = inputsValue.endDate
             const totalAmountAllocated = inputsValue.totalAmountAllocated
 
-        console.log(budgetName)
-        console.log(period)
-        console.log(startDate)
-        console.log(endDate)
-        console.log(totalAmountAllocated)
 
+// const {
+// userId,
+// id,
+// budgetName,
+// periodDate,
+// startDate,
+// endDate,
+// totalAmountAllocated
+// }  = req.body;
+
+console.log('this is userData from context api:',userData)
+
+        fetch('http://localhost:5000/createBudget', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId : userData.userID,
+        budgetName,
+        periodDate:period,
+        startDate,
+        endDate,
+        totalAmountAllocated
+      }),
+    }).then(() => {
+      console.log('DONE');
+    });
         }
 
     return(

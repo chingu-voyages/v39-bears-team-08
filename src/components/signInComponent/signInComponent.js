@@ -30,11 +30,16 @@ export default function SignInComponent() {
       .then((res) => {
         console.log(res);
         setIsLoggedIn(true);
+        console.log('line 33 from signin',res.data);
         setUserData(res.data);
+         window.location.replace('/budgetpage');
       })
       .catch((err) => {
+        console.log('line 37');
         console.log(err);
+        return;
       });
+
 
     console.log("sub");
   };

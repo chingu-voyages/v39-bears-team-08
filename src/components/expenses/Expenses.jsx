@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
+import { Context } from "../../Context.js";
+
 import { useParams } from 'react-router-dom';
 import {
   Container,
@@ -27,6 +29,9 @@ const Expenses = () => {
   };
 
   const [inputsValue, setInputsValue] = useState(initialValues);
+
+  const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
+    useContext(Context);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +62,7 @@ const Expenses = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        userID:userData.userID,
         id,
         groceries,
         restaurant,
