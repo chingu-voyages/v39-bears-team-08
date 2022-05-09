@@ -1,16 +1,8 @@
 import React, { useState, useContext} from 'react';
 import { Context } from "../../Context.js";
-
+import '../../pages/createBudget/createBudget.css'
 import { useParams } from 'react-router-dom';
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const Expenses = () => {
   const { id } = useParams();
@@ -30,8 +22,7 @@ const Expenses = () => {
 
   const [inputsValue, setInputsValue] = useState(initialValues);
 
-  const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
-    useContext(Context);
+  const { isLoggedIn, setIsLoggedIn, setUserData, userData } = useContext(Context);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,12 +40,12 @@ const Expenses = () => {
 
     const groceries = inputsValue.groceries;
     const restaurant = inputsValue.restaurant;
-    const barCafe = inputsValue.barcafe;
+    const barcafe = inputsValue.barcafe;
     const rent = inputsValue.rent;
     const utilities = inputsValue.utilities;
     const insurance = inputsValue.insurance;
     const fuel = inputsValue.fuel;
-    const entertaiment = inputsValue.entertaiment;
+    const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
     const total = inputsValue.total;
 
@@ -66,40 +57,33 @@ const Expenses = () => {
         id,
         groceries,
         restaurant,
-        barCafe,
+        barcafe,
         rent,
         utilities,
         insurance,
         fuel,
-        entertaiment,
+        entertainment,
         communication,
         total,
       }),
     }).then(() => {
-      console.log('DONE');
+      debugger
+      console.log('Submission Successful');
+      window.location.replace('/budgetpage');
     });
   };
 
   return (
     <>
       <Container>
+      <div class="pt-2">
+          <header class="header p-2 justify-content-right">
+            <h1>Expenses </h1>
+         </header>
+       </div>
         <Row>
           <Col lg={3} md={3} sm={5} className='p-4 m-auto shadow-sm rounded-lg'>
-            <DropdownButton
-              className='p-3 mb-3'
-              id='budget-allocated'
-              title='Budget Allocated'
-            >
-              <Dropdown.Item href='#/action-1'>
-                Expenses Name Here
-              </Dropdown.Item>
-              <Dropdown.Item href='#/action-2'>
-                Expenses Name Here
-              </Dropdown.Item>
-              <Dropdown.Item href='#/action-3'>
-                Expenses Name Here
-              </Dropdown.Item>
-            </DropdownButton>
+            <h2>Expenses</h2>
             <Form onSubmit={handleSubmit}>
               <Form.Group className='mb-3' controlId='groceries'>
                 <Form.Label>Groceries</Form.Label>
@@ -204,6 +188,9 @@ const Expenses = () => {
 
               <Button variant='primary' type='submit'>
                 Save
+              </Button>
+              <Button variant='danger' className='m-5' type='submit'>
+                Delete
               </Button>
             </Form>
           </Col>
