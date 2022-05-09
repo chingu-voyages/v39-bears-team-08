@@ -17,7 +17,6 @@ const Expenses = () => {
     fuel: 0,
     entertaiment: 0,
     communication: 0,
-    total: 0,
   };
 
   const [inputsValue, setInputsValue] = useState(initialValues);
@@ -27,16 +26,29 @@ const Expenses = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    setInputsValue({
+    const newValues = {
       ...inputsValue,
       [name]: value,
-    });
+    };
+    setInputsValue(newValues)
+
+    calculateTotalValues(newValues)
   };
+
+  const [totalValue,setTotalValue] = useState(0);
+
+  const calculateTotalValues = (newValues) => {
+    const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
+    const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
+    setTotalValue(newTotal)
+    console.log(totalValue.total)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log('handleSubmit');
+    console.log(totalValue)
 
     const groceries = inputsValue.groceries;
     const restaurant = inputsValue.restaurant;
@@ -47,8 +59,8 @@ const Expenses = () => {
     const fuel = inputsValue.fuel;
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
-    const total = inputsValue.total;
-
+    const total = total.total;
+    
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -180,8 +192,8 @@ const Expenses = () => {
                 <Form.Control
                   type='number'
                   placeholder='Total'
-                  value={inputsValue.total}
-                  onChange={handleInputChange}
+                  value={totalValue}
+                  onChange={handleInputChange}            
                   name='total'
                 />
               </Form.Group>
