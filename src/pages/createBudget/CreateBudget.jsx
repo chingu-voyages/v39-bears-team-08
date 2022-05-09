@@ -61,8 +61,10 @@ console.log('this is userData from context api:',userData)
         totalAmountAllocated
       }),
     }).then(() => {
-      console.log('DONE');
-    });
+        debugger
+        console.log('Submission Successful');
+        window.location.replace('/');
+      });
         }
 
     return(
