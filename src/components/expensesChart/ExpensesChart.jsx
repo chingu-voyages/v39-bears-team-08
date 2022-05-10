@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
-
+import { useParams } from 'react-router-dom';
 
 ChartJS.register(
     Tooltip,
@@ -40,7 +40,8 @@ const ExpensesChart = () =>{
                 data={{
                     // labels: console.log(chart.map(item => item.rent)),
                     // labels: ['Groceries', 'Restaurant', 'BarCafe', 'Rent', 'Utilities', 'Insurances', 'Fuel', 'Entertainment', 'Communication'],
-                      labels:  Object.keys(chart),
+                    //   labels:  Object.keys(chart),
+                       labels:  Object.keys(chart),
                       //labels:  Object.entries(chart).filter(([key, _]) => key !== "userid"),
                     datasets: [
                         {

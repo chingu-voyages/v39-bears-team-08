@@ -21,9 +21,11 @@ const Expenses = () => {
 
   const [inputsValue, setInputsValue] = useState(initialValues);
 
-  const { isLoggedIn, setIsLoggedIn, setUserData, userData } = useContext(Context);
+  const { userData } = useContext(Context);
+
 
   const handleInputChange = (e) => {
+    // taking the information from the input form
     const { name, value } = e.target;
 
     const newValues = {
@@ -34,21 +36,18 @@ const Expenses = () => {
 
     calculateTotalValues(newValues)
   };
-
+/// setting state for total value
   const [totalValue,setTotalValue] = useState(0);
-
+//  calculating the total of each input
   const calculateTotalValues = (newValues) => {
     const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
     const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
     setTotalValue(newTotal)
-    console.log(totalValue.total)
+    console.log(totalValue)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log('handleSubmit');
-    console.log(totalValue)
 
     const groceries = inputsValue.groceries;
     const restaurant = inputsValue.restaurant;
@@ -59,27 +58,28 @@ const Expenses = () => {
     const fuel = inputsValue.fuel;
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
-    const total = total.total;
+    const totalExpense = totalValue
+ 
     
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        userID:userData.userID,
-        id,
-        groceries,
-        restaurant,
-        barcafe,
-        rent,
-        utilities,
-        insurance,
-        fuel,
-        entertainment,
-        communication,
-        total,
+        userID: userData.userid,
+        id: id,
+        groceries: groceries,
+        restaurant: restaurant,
+        barcafe: barcafe,
+        rent: rent,
+        utilities: utilities,
+        insurance: insurance,
+        fuel: fuel,
+        entertainment: entertainment,
+        communication: communication,
+        total: totalExpense,
       }),
     }).then(() => {
-      debugger
+
       console.log('Submission Successful');
       window.location.replace('/budgetpage');
     });
