@@ -6,7 +6,7 @@ import { Context } from "../../Context";
 import { useNavigate } from "react-router-dom";
 
 export default function BudgetPage() {
-  const { isLoggedIn, userData } = useContext(Context);
+  const { isLoggedIn } = useContext(Context);
   let navigate = useNavigate();
 
   const loginHandler = () => {
