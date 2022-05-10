@@ -45,7 +45,8 @@ export default function BudgetPage() {
         <Link to="/expense:id">Budget1</Link>
         <Link to="/expense:id">Budget1</Link>
         <Link to="/expense:id">Budget1</Link>
-        <button>Create new budget</button>
+        <Link to="/newBudget"><button>Create new budget</button></Link>
+
       </div>
 
       <div className="expense-result">

@@ -15,7 +15,7 @@ import { Context } from "../../Context.js";
 
         const [inputsValue, setInputsValue] = useState(initialValues)
 
-        const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
+        const { userData } =
     useContext(Context);
 
         const handleInputChange = (e) => {
@@ -53,7 +53,7 @@ console.log('this is userData from context api:',userData)
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        userId : userData.userID,
+        userID : userData.userid,
         budgetName,
         periodDate:period,
         startDate,
@@ -61,12 +61,12 @@ console.log('this is userData from context api:',userData)
         totalAmountAllocated
       }),
     }).then(() => {
-        debugger
         console.log('Submission Successful');
-        window.location.replace('/');
+        console.log(userData.userid)
+        // window.location.replace('/budgetPage');
       });
         }
-
+console.log(userData)
     return(
         <>
             <Container>
