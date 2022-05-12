@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
-
+import { useParams } from 'react-router-dom';
 
 ChartJS.register(
     Tooltip,
@@ -40,7 +40,14 @@ const ExpensesChart = () =>{
                 data={{
                     // labels: console.log(chart.map(item => item.rent)),
                     // labels: ['Groceries', 'Restaurant', 'BarCafe', 'Rent', 'Utilities', 'Insurances', 'Fuel', 'Entertainment', 'Communication'],
-                      labels:  Object.keys(chart),
+                    //   labels:  Object.keys(chart),
+                       labels:  Object.keys(chart).filter(function(exp){ 
+                           if((exp == "groceries") || (exp == "restaurant") || (exp == "barcafe") || (exp == "rent") || (exp == "utilities") || (exp == "insurance") || (exp == "fuel") || (exp == "entertainment") || (exp == "communication")){
+                               return true
+                           } else {
+                               return false
+                           }
+                        }),
                       //labels:  Object.entries(chart).filter(([key, _]) => key !== "userid"),
                     datasets: [
                         {
@@ -55,7 +62,7 @@ const ExpensesChart = () =>{
                             'rgba(128, 0, 128, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
                             'rgba(199, 21, 133, 0.2)',
-                            'rgba(188, 143, 143, 0.2)',
+                            
                           ],
                           borderColor: [
                             'rgba(255, 99, 132, 1)',
@@ -66,7 +73,7 @@ const ExpensesChart = () =>{
                             'rgba(128, 0, 128, 1)',
                             'rgba(255, 159, 64, 1)',
                             'rgba(199, 21, 133, 1)',
-                            'rgba(188, 143, 143, 1)',
+                            
                           ],
                           borderWidth: 0.5,
                         },

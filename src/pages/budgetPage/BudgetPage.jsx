@@ -9,6 +9,7 @@ export default function BudgetPage() {
   const { isLoggedIn } = useContext(Context);
   let navigate = useNavigate();
 
+  console.log("UserID",userData)
   const loginHandler = () => {
     if (isLoggedIn) {
       window.location.reload();
