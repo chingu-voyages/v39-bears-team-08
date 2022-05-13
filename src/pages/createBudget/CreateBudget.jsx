@@ -15,7 +15,7 @@ import { Context } from "../../Context.js";
 
         const [inputsValue, setInputsValue] = useState(initialValues)
 
-        const { isLoggedIn, setIsLoggedIn, setUserData, userData } =
+        const { isLoggedIn, setIsLoggedIn, setUserData, userData, budgetList, setBudgetList } =
     useContext(Context);
 
         const handleInputChange = (e) => {
@@ -37,16 +37,6 @@ import { Context } from "../../Context.js";
             const totalAmountAllocated = inputsValue.totalAmountAllocated
 
 
-// const {
-// userId,
-// id,
-// budgetName,
-// periodDate,
-// startDate,
-// endDate,
-// totalAmountAllocated
-// }  = req.body;
-
 console.log('this is userData from context api:',userData)
 
         fetch('http://localhost:5000/createBudget', {
@@ -60,9 +50,14 @@ console.log('this is userData from context api:',userData)
         endDate,
         totalAmountAllocated
       }),
-    }).then(() => {
-      console.log('DONE');
+    }).then((response) => response.json())
+    .then((result) => {
+        console.log(result)
     });
+    console.log("here")
+
+    const newBudgetList = [...budgetList, budgetName]
+    setBudgetList(newBudgetList)
         }
 
     return(
