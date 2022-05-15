@@ -22,7 +22,10 @@ const Expenses = () => {
   const [inputsValue, setInputsValue] = useState(initialValues);
 
   const { userData } = useContext(Context);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6d3ffa36742ae83c9ff5e7770247b57750fa3b6b
 
   const handleInputChange = (e) => {
     // taking the information from the input form
@@ -58,9 +61,14 @@ const Expenses = () => {
     const fuel = inputsValue.fuel;
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
+<<<<<<< HEAD
+    const total = total.total;
+
+=======
     const totalExpense = totalValue
  
     
+>>>>>>> 6d3ffa36742ae83c9ff5e7770247b57750fa3b6b
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -193,7 +201,7 @@ const Expenses = () => {
                   type='number'
                   placeholder='Total'
                   value={totalValue}
-                  onChange={handleInputChange}            
+                  onChange={handleInputChange}
                   name='total'
                 />
               </Form.Group>
