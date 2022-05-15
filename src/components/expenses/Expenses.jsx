@@ -59,8 +59,8 @@ const Expenses = () => {
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
     const totalExpense = totalValue
- 
-    
+
+
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -193,7 +193,7 @@ const Expenses = () => {
                   type='number'
                   placeholder='Total'
                   value={totalValue}
-                  onChange={handleInputChange}            
+                  onChange={handleInputChange}
                   name='total'
                 />
               </Form.Group>

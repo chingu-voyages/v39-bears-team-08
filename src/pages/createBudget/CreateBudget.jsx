@@ -7,7 +7,7 @@ import { Context } from "../../Context.js";
     const NewBudget = () => {
         const initialValues = {
             budgetName: null,
-            period: "weekly",
+            periodDate: null,
             startDate: null,
             endDate: null,
             totalAmountAllocated: 0
@@ -31,7 +31,7 @@ import { Context } from "../../Context.js";
         const handleSubmit = (e) =>{
             e.preventDefault()
             const budgetName = inputsValue.budgetName
-            const period = inputsValue.period
+            const period = inputsValue.periodDate
             const startDate = inputsValue.startDate
             const endDate = inputsValue.endDate
             const totalAmountAllocated = inputsValue.totalAmountAllocated
@@ -78,10 +78,10 @@ console.log('this is userData from context api:',userData)
                             <Form.Group className="mb-3" controlId="period">
                                 <Form.Label>Period</Form.Label>
                                 {/* <Form.Control type="text" placeholder="Weekly" value={inputsValue.period} onChange={handleInputChange} name="period" /> */}
-                           <DropdownButton className='p-3 mb-3'id="period" title="Period">
-                        <Dropdown.Item href="#/action-1">Daily</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Monthly</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Annually</Dropdown.Item>
+                           <DropdownButton class="selectpicker" className='p-3 mb-3'id="period" title="Period">
+                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Daily</Dropdown.Item>
+                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Monthly</Dropdown.Item>
+                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Annually</Dropdown.Item>
                             </DropdownButton>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="bar-cafe">
