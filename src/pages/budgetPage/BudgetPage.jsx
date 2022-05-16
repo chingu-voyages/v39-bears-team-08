@@ -13,6 +13,7 @@ export default function BudgetPage() {
   const loginHandler = () => {
     if (isLoggedIn) {
       navigate("/");
+      window.location.reload();
     } else {
       navigate("/");
     }
@@ -31,7 +32,7 @@ export default function BudgetPage() {
           <h1>Logo</h1>
         </div>
         <div className="right-side">
-          <h2>Welcome {userData.firstname}</h2>
+          <h2>Welcome {userData.firstame} </h2>
           <button onClick={loginHandler}>
             {isLoggedIn ? "Sign out" : "Sign in"}
           </button>
