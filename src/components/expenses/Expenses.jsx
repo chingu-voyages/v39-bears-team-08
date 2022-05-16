@@ -83,6 +83,13 @@ const Expenses = () => {
     });
   };
 
+  const handleDelete = () => {
+
+    
+  }
+
+
+
   return (
     <>
       <Container>
@@ -199,7 +206,7 @@ const Expenses = () => {
               <Button variant='primary' type='submit'>
                 Save
               </Button>
-              <Button variant='danger' className='m-5' type='submit'>
+              <Button variant='danger' className='m-5' type='submit' onClick={handleDelete}>
                 Delete
               </Button>
             </Form>
