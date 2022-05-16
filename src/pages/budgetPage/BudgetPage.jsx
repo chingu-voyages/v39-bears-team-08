@@ -9,10 +9,10 @@ export default function BudgetPage() {
   const { isLoggedIn, userData, budgetList } = useContext(Context);
   let navigate = useNavigate();
 
-  console.log("UserID",userData)
+  console.log("UserID", userData);
   const loginHandler = () => {
     if (isLoggedIn) {
-      window.location.reload();
+      navigate("/");
     } else {
       navigate("/");
     }
@@ -31,7 +31,7 @@ export default function BudgetPage() {
           <h1>Logo</h1>
         </div>
         <div className="right-side">
-          <h2>Welcome </h2>
+          <h2>Welcome {userData.firstname}</h2>
           <button onClick={loginHandler}>
             {isLoggedIn ? "Sign out" : "Sign in"}
           </button>
@@ -42,13 +42,15 @@ export default function BudgetPage() {
       <div className="budget">
         <h1>Budget</h1>
         {budgetList.map((budget, key) => {
-              return (
-                <Link to="/expense:id" key={key}>
-                  {budget}
-                </Link>
-              );
-            })}
-        <Link to="/newBudget"><button>Create new budget</button></Link>
+          return (
+            <Link to="/expense:id" key={key}>
+              {budget}
+            </Link>
+          );
+        })}
+        <Link to="/newBudget">
+          <button>Create new budget</button>
+        </Link>
       </div>
 
       <div className="expense-result">

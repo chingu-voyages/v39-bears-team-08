@@ -1,0 +1,10 @@
+.sign-in-header {
+  text-align: center;
+}
+
+.sign-in-box {
+  width: 400px;
+  border: 1px solid green;
+  height: 400px;
+  margin: 0 auto;
+}
