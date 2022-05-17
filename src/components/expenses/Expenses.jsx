@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { Context } from "../../Context.js";
 import '../../pages/createBudget/createBudget.css'
 import { useParams } from 'react-router-dom';
@@ -83,12 +83,7 @@ const Expenses = () => {
     });
   };
 
-  const handleDelete = () => {
-
-    
-  }
-
-
+  
 
   return (
     <>
@@ -206,7 +201,7 @@ const Expenses = () => {
               <Button variant='primary' type='submit'>
                 Save
               </Button>
-              <Button variant='danger' className='m-5' type='submit' onClick={handleDelete}>
+              <Button variant='danger' className='m-5' type='submit'>
                 Delete
               </Button>
             </Form>
