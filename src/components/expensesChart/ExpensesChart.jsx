@@ -1,18 +1,58 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2'
-import {Chart as ChartJS} from 'chart.js/auto'
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js'
+import { useParams } from 'react-router-dom';
+
+ChartJS.register(
+    Tooltip,
+    Legend,
+    ArcElement
+)
 
 const ExpensesChart = () =>{
+    const [chart, setChart] = useState([])
+
+    const expensesURL = "http://localhost:5000/budget/1"
+
+    useEffect(()=> {
+        const fetchExpenses = async () => {
+            await fetch(`http://localhost:5000/budget/1`,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-origin': '*'
+                }
+            }).then((response) =>{response.json()
+              .then((expensesData) => {
+                  console.log(expensesData.data)
+                  setChart(expensesData.data)
+              })
+            }).catch(error => {
+                console.log(error)
+            })
+        }
+        fetchExpenses()
+    }, [expensesURL])
 
     return(
         <div>
             <Doughnut 
                 data={{
-                    labels: ['Groceries', 'Restaurant', 'BarCafe', 'Rent', 'Utilities', 'Insurances', 'Fuel', 'Entertainment', 'Communication'],
+                    // labels: console.log(chart.map(item => item.rent)),
+                    // labels: ['Groceries', 'Restaurant', 'BarCafe', 'Rent', 'Utilities', 'Insurances', 'Fuel', 'Entertainment', 'Communication'],
+                    //   labels:  Object.keys(chart),
+                       labels:  Object.keys(chart).filter(function(exp){ 
+                           if((exp == "groceries") || (exp == "restaurant") || (exp == "barcafe") || (exp == "rent") || (exp == "utilities") || (exp == "insurance") || (exp == "fuel") || (exp == "entertainment") || (exp == "communication")){
+                               return true
+                           } else {
+                               return false
+                           }
+                        }),
+                      //labels:  Object.entries(chart).filter(([key, _]) => key !== "userid"),
                     datasets: [
                         {
                           label: '# of Expenses',
-                          data: [12, 19, 3, 5, 2, 3, 8, 14, 20],
+                          data: Object.values(chart),
                           backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
@@ -22,7 +62,7 @@ const ExpensesChart = () =>{
                             'rgba(128, 0, 128, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
                             'rgba(199, 21, 133, 0.2)',
-                            'rgba(188, 143, 143, 0.2)',
+                            
                           ],
                           borderColor: [
                             'rgba(255, 99, 132, 1)',
@@ -33,7 +73,7 @@ const ExpensesChart = () =>{
                             'rgba(128, 0, 128, 1)',
                             'rgba(255, 159, 64, 1)',
                             'rgba(199, 21, 133, 1)',
-                            'rgba(188, 143, 143, 1)',
+                            
                           ],
                           borderWidth: 0.5,
                         },

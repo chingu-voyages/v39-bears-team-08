@@ -1,23 +1,22 @@
-import React from "react";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage/Homepage";
-import BudgetPage from "./pages/budgetPage/BudgetPage";
-import Expenses from "./components/expenses/Expenses";
-import SignInPage from "./pages/signInPage/signInPage";
+import React from 'react';
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import BudgetPage from './pages/budgetPage/BudgetPage';
+import Expenses from './components/expenses/Expenses';
+import SignInPage from './pages/signInPage/signInPage';
+import SignUp from './pages/singUpPage/signUpPage';
 
-import NewBudget from "./pages/createBudget/CreateBudget";
-
+import NewBudget from './pages/createBudget/CreateBudget';
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
-        <Route path="/budgetpage" element={<BudgetPage />}></Route>
-        <Route path="/expenses" element={<Expenses />}></Route>
-        <Route path="/signin" element={<SignInPage />}></Route>
-        <Route path="/newbudget" element={<NewBudget />}></Route>
+        <Route path='/budgetpage' element={<BudgetPage />}></Route>
+        <Route path='/expenses' element={<Expenses />}></Route>
+        <Route path='/' element={<SignInPage />}></Route>
+        <Route path='/newbudget' element={<NewBudget />}></Route>
+        <Route path='/createUser' element={<SignUp />}></Route>
       </Routes>
     </div>
   );

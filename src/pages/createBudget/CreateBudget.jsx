@@ -1,18 +1,20 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import "./createBudget.css";
+import { Context } from "../../Context.js";
 
 
     const NewBudget = () => {
         const initialValues = {
             budgetName: null,
-            period: "weekly",
+            periodDate: "weekly",
             startDate: null,
             endDate: null,
             totalAmountAllocated: 0
         }
 
         const [inputsValue, setInputsValue] = useState(initialValues)
+        const { userData, budgetList, setBudgetList } = useContext(Context);
 
         const handleInputChange = (e) => {
             const {name, value} = e.target
@@ -23,22 +25,40 @@ import "./createBudget.css";
             })
         }
 
+
         const handleSubmit = (e) =>{
             e.preventDefault()
             const budgetName = inputsValue.budgetName
-            const period = inputsValue.period
+            const period = inputsValue.periodDate
             const startDate = inputsValue.startDate
             const endDate = inputsValue.endDate
             const totalAmountAllocated = inputsValue.totalAmountAllocated
 
-        console.log(budgetName)
-        console.log(period)
-        console.log(startDate)
-        console.log(endDate)
-        console.log(totalAmountAllocated)
+console.log('this is userData from context api:',userData)
 
+        fetch('http://localhost:5000/createBudget', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userID : userData.userid,
+        budgetName,
+        periodDate:period,
+        startDate,
+        endDate,
+        totalAmountAllocated
+      }),
+    }).then((response) => response.json())
+    .then((result) => {
+        console.log(result)
+        window.location.replace('/budgetpage');
+
+    });
+    console.log("here")
+
+    const newBudgetList = [...budgetList, budgetName]
+    setBudgetList(newBudgetList)
         }
-
+console.log(userData)
     return(
         <>
             <Container>
@@ -55,13 +75,12 @@ import "./createBudget.css";
                                 <Form.Control type="text" placeholder="Budget Name" value={inputsValue.budgetName} onChange={handleInputChange} name="budgetName" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="period">
-                                <Form.Label>Period</Form.Label>
-                                {/* <Form.Control type="text" placeholder="Weekly" value={inputsValue.period} onChange={handleInputChange} name="period" /> */}
-                           <DropdownButton className='p-3 mb-3'id="period" title="Period">
-                        <Dropdown.Item href="#/action-1">Daily</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Monthly</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Annually</Dropdown.Item>
-                            </DropdownButton>
+                                <select class="form-select" aria-label="Default select example" id="period" title="Period" type="text" value={inputsValue.period} onChange={handleInputChange} name="period">
+                                <option selected>Period</option>
+                                    <option value="one">One</option>
+                                    <option value="two">Two</option>
+                                    <option value="three">Three</option>
+                                </select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="bar-cafe">
                                 <Form.Label>Start Date</Form.Label>

@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect} from 'react';
+import { Context } from "../../Context.js";
+import '../../pages/createBudget/createBudget.css'
 import { useParams } from 'react-router-dom';
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  DropdownButton,
-  Dropdown,
-} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 const Expenses = () => {
   const { id } = useParams();
@@ -23,77 +17,87 @@ const Expenses = () => {
     fuel: 0,
     entertaiment: 0,
     communication: 0,
-    total: 0,
   };
 
   const [inputsValue, setInputsValue] = useState(initialValues);
 
+  const { userData } = useContext(Context);
+
   const handleInputChange = (e) => {
+    // taking the information from the input form
     const { name, value } = e.target;
 
-    setInputsValue({
+    const newValues = {
       ...inputsValue,
       [name]: value,
-    });
+    };
+    setInputsValue(newValues)
+
+    calculateTotalValues(newValues)
   };
+/// setting state for total value
+  const [totalValue,setTotalValue] = useState(0);
+//  calculating the total of each input
+  const calculateTotalValues = (newValues) => {
+    const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
+    const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
+    setTotalValue(newTotal)
+    console.log(totalValue)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('handleSubmit');
-
     const groceries = inputsValue.groceries;
     const restaurant = inputsValue.restaurant;
-    const barCafe = inputsValue.barcafe;
+    const barcafe = inputsValue.barcafe;
     const rent = inputsValue.rent;
     const utilities = inputsValue.utilities;
     const insurance = inputsValue.insurance;
     const fuel = inputsValue.fuel;
-    const entertaiment = inputsValue.entertaiment;
+    const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
-    const total = inputsValue.total;
+    const total = total.total;
+    const totalExpense = totalValue
+
 
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id,
-        groceries,
-        restaurant,
-        barCafe,
-        rent,
-        utilities,
-        insurance,
-        fuel,
-        entertaiment,
-        communication,
-        total,
+        userID: userData.userid,
+        id: id,
+        groceries: groceries,
+        restaurant: restaurant,
+        barcafe: barcafe,
+        rent: rent,
+        utilities: utilities,
+        insurance: insurance,
+        fuel: fuel,
+        entertainment: entertainment,
+        communication: communication,
+        total: totalExpense,
       }),
     }).then(() => {
-      console.log('DONE');
+
+      console.log('Submission Successful');
+      window.location.replace('/budgetpage');
     });
   };
+
+
 
   return (
     <>
       <Container>
+      <div class="pt-2">
+          <header class="header p-2 justify-content-right">
+            <h1>Expenses </h1>
+         </header>
+       </div>
         <Row>
           <Col lg={3} md={3} sm={5} className='p-4 m-auto shadow-sm rounded-lg'>
-            <DropdownButton
-              className='p-3 mb-3'
-              id='budget-allocated'
-              title='Budget Allocated'
-            >
-              <Dropdown.Item href='#/action-1'>
-                Expenses Name Here
-              </Dropdown.Item>
-              <Dropdown.Item href='#/action-2'>
-                Expenses Name Here
-              </Dropdown.Item>
-              <Dropdown.Item href='#/action-3'>
-                Expenses Name Here
-              </Dropdown.Item>
-            </DropdownButton>
+            <h2>Expenses</h2>
             <Form onSubmit={handleSubmit}>
               <Form.Group className='mb-3' controlId='groceries'>
                 <Form.Label>Groceries</Form.Label>
@@ -190,7 +194,7 @@ const Expenses = () => {
                 <Form.Control
                   type='number'
                   placeholder='Total'
-                  value={inputsValue.total}
+                  value={totalValue}
                   onChange={handleInputChange}
                   name='total'
                 />
@@ -198,6 +202,9 @@ const Expenses = () => {
 
               <Button variant='primary' type='submit'>
                 Save
+              </Button>
+              <Button variant='danger' className='m-5' type='submit'>
+                Delete
               </Button>
             </Form>
           </Col>
