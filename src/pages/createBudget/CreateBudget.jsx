@@ -7,15 +7,14 @@ import { Context } from "../../Context.js";
     const NewBudget = () => {
         const initialValues = {
             budgetName: null,
-            periodDate: null,
+            periodDate: "weekly",
             startDate: null,
             endDate: null,
             totalAmountAllocated: 0
         }
 
         const [inputsValue, setInputsValue] = useState(initialValues)
-        const { isLoggedIn, setIsLoggedIn, setUserData, userData, budgetList, setBudgetList } =
-    useContext(Context);
+        const { userData, budgetList, setBudgetList } = useContext(Context);
 
         const handleInputChange = (e) => {
             const {name, value} = e.target
@@ -51,6 +50,8 @@ console.log('this is userData from context api:',userData)
     }).then((response) => response.json())
     .then((result) => {
         console.log(result)
+        window.location.replace('/budgetpage');
+
     });
     console.log("here")
 
@@ -74,13 +75,12 @@ console.log(userData)
                                 <Form.Control type="text" placeholder="Budget Name" value={inputsValue.budgetName} onChange={handleInputChange} name="budgetName" />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="period">
-                                <Form.Label>Period</Form.Label>
-                                {/* <Form.Control type="text" placeholder="Weekly" value={inputsValue.period} onChange={handleInputChange} name="period" /> */}
-                           <DropdownButton class="selectpicker" className='p-3 mb-3'id="period" title="Period">
-                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Daily</Dropdown.Item>
-                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Monthly</Dropdown.Item>
-                        <Dropdown.Item value={inputsValue.period} onChange={handleInputChange} >Annually</Dropdown.Item>
-                            </DropdownButton>
+                                <select class="form-select" aria-label="Default select example" id="period" title="Period" type="text" value={inputsValue.period} onChange={handleInputChange} name="period">
+                                <option selected>Period</option>
+                                    <option value="one">One</option>
+                                    <option value="two">Two</option>
+                                    <option value="three">Three</option>
+                                </select>
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="bar-cafe">
                                 <Form.Label>Start Date</Form.Label>
