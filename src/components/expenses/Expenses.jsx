@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect} from 'react';
 import { Context } from "../../Context.js";
 import '../../pages/createBudget/createBudget.css'
 import { useParams } from 'react-router-dom';
@@ -84,6 +84,8 @@ const Expenses = () => {
       window.location.replace('/budgetpage');
     });
   };
+
+
 
   return (
     <>
