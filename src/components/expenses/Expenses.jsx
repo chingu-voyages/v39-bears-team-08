@@ -3,11 +3,31 @@ import { Context } from "../../Context.js";
 import '../../pages/createBudget/createBudget.css'
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
+
 
 const Expenses = () => {
   const { id } = useParams();
+  const { userData,expenseList,setExpenseList } = useContext(Context);
 
-  const initialValues = {
+  /// setting state for total value
+  const [totalValue,setTotalValue] = useState(0);
+//  calculating the total of each input
+  const calculateTotalValues = (newValues) => {
+    const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
+    const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
+    setTotalValue(newTotal)
+    console.log(totalValue)
+  }
+
+
+
+
+  let initialValues;
+  if(expenseList[id]){
+    initialValues = expenseList[id]
+  }else{
+initialValues = {
     groceries: 0,
     restaurant: 0,
     barcafe: 0,
@@ -18,10 +38,14 @@ const Expenses = () => {
     entertaiment: 0,
     communication: 0,
   };
+  }
+
+
 
   const [inputsValue, setInputsValue] = useState(initialValues);
 
-  const { userData } = useContext(Context);
+
+  let navigate = useNavigate();
 
   const handleInputChange = (e) => {
     // taking the information from the input form
@@ -35,15 +59,13 @@ const Expenses = () => {
 
     calculateTotalValues(newValues)
   };
-/// setting state for total value
-  const [totalValue,setTotalValue] = useState(0);
-//  calculating the total of each input
-  const calculateTotalValues = (newValues) => {
-    const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
-    const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
-    setTotalValue(newTotal)
-    console.log(totalValue)
-  }
+
+
+    // calculateTotalValues(initialValues);
+
+
+    console.log('HEYYYY FROM LINE 65')
+    console.log('THIS IS USER DATA:',userData)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,15 +79,15 @@ const Expenses = () => {
     const fuel = inputsValue.fuel;
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
-    const total = total.total;
     const totalExpense = totalValue
 
+    console.log('userDATA in handleSubmit',userData.data.userID)
 
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        userID: userData.userid,
+        userID: userData.data.userID,
         id: id,
         groceries: groceries,
         restaurant: restaurant,
@@ -78,10 +100,29 @@ const Expenses = () => {
         communication: communication,
         total: totalExpense,
       }),
-    }).then(() => {
+    }).then((response) => response.json())
+    .then((result) => {
 
       console.log('Submission Successful');
-      window.location.replace('/budgetpage');
+      const expenses = {
+         groceries: groceries,
+    restaurant: restaurant,
+    barcafe: barcafe,
+    rent: rent,
+    utilities: utilities,
+    insurance: insurance,
+    fuel: fuel,
+    entertaiment: entertainment,
+    communication: communication,
+     total: totalExpense
+      }
+
+      const expensesWithID = {}
+      expensesWithID[id] = expenses
+
+      setExpenseList({...expenseList,...expensesWithID})
+
+      navigate('/budgetpage');
     });
   };
 
@@ -194,7 +235,7 @@ const Expenses = () => {
                 <Form.Control
                   type='number'
                   placeholder='Total'
-                  value={totalValue}
+                  value={inputsValue.total ? inputsValue.total : totalValue}
                   onChange={handleInputChange}
                   name='total'
                 />

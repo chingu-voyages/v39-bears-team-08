@@ -13,7 +13,7 @@ function App() {
     <div className='App'>
       <Routes>
         <Route path='/budgetpage' element={<BudgetPage />}></Route>
-        <Route path='/expenses' element={<Expenses />}></Route>
+        <Route path='/expense/:id' element={<Expenses />}></Route>
         <Route path='/' element={<SignInPage />}></Route>
         <Route path='/newbudget' element={<NewBudget />}></Route>
         <Route path='/createUser' element={<SignUp />}></Route>

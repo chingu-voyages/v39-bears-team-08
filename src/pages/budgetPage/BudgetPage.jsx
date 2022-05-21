@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import "./BudgetPage.css";
 import { Link } from "react-router-dom";
 import ExpensesChart from "../../components/expensesChart/ExpensesChart";
@@ -9,6 +9,14 @@ export default function BudgetPage() {
   const { isLoggedIn, userData, budgetList } = useContext(Context);
   let navigate = useNavigate();
 
+
+useEffect(()=>{
+  fetch(`http://localhost:5000/budgets/${userData.data.userID}`).then((response)=>response.json()).then((result)=>{
+    console.log('LINE 15 RESULT:',result)
+  })
+
+},[])
+
   console.log("UserID",userData)
   const loginHandler = () => {
     if (isLoggedIn) {
@@ -17,6 +25,8 @@ export default function BudgetPage() {
       navigate("/");
     }
   };
+
+
 
   const signUp = () => {
     navigate("/createUser");
@@ -41,10 +51,13 @@ export default function BudgetPage() {
 
       <div className="budget">
         <h1>Budget</h1>
+        {/* [[luisBudget,1],[sagesBudget,2],[sercanBudget,3]] */}
         {budgetList.map((budget, key) => {
+              const [budgetName,budgetID] = budget
+              const path = `/expense/${budgetID}`
               return (
-                <Link to="/expense:id" key={key}>
-                  {budget}
+                <Link to={path} key={key}>
+                  {budgetName}
                 </Link>
               );
             })}

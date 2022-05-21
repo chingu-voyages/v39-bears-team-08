@@ -2,7 +2,7 @@ import React, {useState,useContext} from "react";
 import { Container, Row, Col, Form, Button, DropdownButton, Dropdown } from 'react-bootstrap';
 import "./createBudget.css";
 import { Context } from "../../Context.js";
-
+import { useNavigate } from "react-router-dom";
 
     const NewBudget = () => {
         const initialValues = {
@@ -15,6 +15,9 @@ import { Context } from "../../Context.js";
 
         const [inputsValue, setInputsValue] = useState(initialValues)
         const { userData, budgetList, setBudgetList } = useContext(Context);
+
+          let navigate = useNavigate();
+
 
         const handleInputChange = (e) => {
             const {name, value} = e.target
@@ -49,8 +52,10 @@ console.log('this is userData from context api:',userData)
       }),
     }).then((response) => response.json())
     .then((result) => {
-        console.log(result)
-        window.location.replace('/budgetpage');
+        const newBudget = [budgetName,result.data.budgetid]
+        const allBudgets = [...budgetList,newBudget]
+        setBudgetList(allBudgets)
+        navigate('/budgetpage');
 
     });
     console.log("here")

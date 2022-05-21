@@ -7,10 +7,11 @@ function ContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState("");
   const [budgetList, setBudgetList] = useState([]);
+  const [expenseList,setExpenseList] = useState({})
 
   return (
     <Context.Provider
-      value={{ isLoggedIn, setIsLoggedIn, userData, setUserData, budgetList, setBudgetList }}
+      value={{ isLoggedIn, setIsLoggedIn, userData, setUserData, budgetList, setBudgetList,expenseList,setExpenseList }}
     >
       {props.children}
     </Context.Provider>
