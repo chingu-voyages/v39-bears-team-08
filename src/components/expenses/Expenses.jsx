@@ -1,49 +1,63 @@
-import React, { useState, useContext, useEffect} from 'react';
-import { Context } from "../../Context.js";
-import '../../pages/createBudget/createBudget.css'
+import React, { useState, useContext, useEffect } from 'react';
+import { Context } from '../../Context.js';
+import '../../pages/createBudget/createBudget.css';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom';
 
 const Expenses = () => {
   const { id } = useParams();
-  const { userData,expenseList,setExpenseList } = useContext(Context);
+  const { userData, expenseList, setExpenseList } = useContext(Context);
 
   /// setting state for total value
-  const [totalValue,setTotalValue] = useState(0);
-//  calculating the total of each input
+  const [totalValue, setTotalValue] = useState(0);
+  //  calculating the total of each input
   const calculateTotalValues = (newValues) => {
-    const { groceries , restaurant, barcafe, rent, utilities, insurance, fuel, entertaiment, communication} = newValues;
-    const newTotal = parseInt(groceries) + parseInt(restaurant) + parseInt(barcafe) + parseInt(rent) + parseInt(utilities) + parseInt(insurance) + parseInt(fuel) + parseInt(entertaiment) + parseInt(communication)
-    setTotalValue(newTotal)
-    console.log(totalValue)
-  }
+    const {
+      groceries,
+      restaurant,
+      barcafe,
+      rent,
+      utilities,
+      insurance,
+      fuel,
+      entertaiment,
+      communication,
+    } = newValues;
+    const newTotal =
+      parseInt(groceries) +
+      parseInt(restaurant) +
+      parseInt(barcafe) +
+      parseInt(rent) +
+      parseInt(utilities) +
+      parseInt(insurance) +
+      parseInt(fuel) +
+      parseInt(entertaiment) +
+      parseInt(communication);
+    setTotalValue(newTotal);
+    console.log(totalValue);
+  };
 
-
-
+  console.log('this is budgetid:', id);
 
   let initialValues;
-  if(expenseList[id]){
-    initialValues = expenseList[id]
-  }else{
-initialValues = {
-    groceries: 0,
-    restaurant: 0,
-    barcafe: 0,
-    rent: 0,
-    utilities: 0,
-    insurance: 0,
-    fuel: 0,
-    entertaiment: 0,
-    communication: 0,
-  };
+  if (expenseList[id]) {
+    initialValues = expenseList[id];
+  } else {
+    initialValues = {
+      groceries: 0,
+      restaurant: 0,
+      barcafe: 0,
+      rent: 0,
+      utilities: 0,
+      insurance: 0,
+      fuel: 0,
+      entertaiment: 0,
+      communication: 0,
+    };
   }
 
-
-
   const [inputsValue, setInputsValue] = useState(initialValues);
-
 
   let navigate = useNavigate();
 
@@ -55,17 +69,15 @@ initialValues = {
       ...inputsValue,
       [name]: value,
     };
-    setInputsValue(newValues)
+    setInputsValue(newValues);
 
-    calculateTotalValues(newValues)
+    calculateTotalValues(newValues);
   };
 
+  // calculateTotalValues(initialValues);
 
-    // calculateTotalValues(initialValues);
-
-
-    console.log('HEYYYY FROM LINE 65')
-    console.log('THIS IS USER DATA:',userData)
+  console.log('HEYYYY FROM LINE 65');
+  console.log('THIS IS USER DATA:', userData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,9 +91,9 @@ initialValues = {
     const fuel = inputsValue.fuel;
     const entertainment = inputsValue.entertaiment;
     const communication = inputsValue.communication;
-    const totalExpense = totalValue
+    const totalExpense = totalValue;
 
-    console.log('userDATA in handleSubmit',userData.data.userID)
+    console.log('userDATA in handleSubmit', userData.data.userID);
 
     fetch('http://localhost:5000/createExpenses', {
       method: 'POST',
@@ -100,42 +112,40 @@ initialValues = {
         communication: communication,
         total: totalExpense,
       }),
-    }).then((response) => response.json())
-    .then((result) => {
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('Submission Successful');
+        const expenses = {
+          groceries: groceries,
+          restaurant: restaurant,
+          barcafe: barcafe,
+          rent: rent,
+          utilities: utilities,
+          insurance: insurance,
+          fuel: fuel,
+          entertaiment: entertainment,
+          communication: communication,
+          total: totalExpense,
+        };
 
-      console.log('Submission Successful');
-      const expenses = {
-         groceries: groceries,
-    restaurant: restaurant,
-    barcafe: barcafe,
-    rent: rent,
-    utilities: utilities,
-    insurance: insurance,
-    fuel: fuel,
-    entertaiment: entertainment,
-    communication: communication,
-     total: totalExpense
-      }
+        const expensesWithID = {};
+        expensesWithID[id] = expenses;
 
-      const expensesWithID = {}
-      expensesWithID[id] = expenses
+        setExpenseList({ ...expenseList, ...expensesWithID });
 
-      setExpenseList({...expenseList,...expensesWithID})
-
-      navigate('/budgetpage');
-    });
+        navigate('/budgetpage');
+      });
   };
-
-
 
   return (
     <>
       <Container>
-      <div class="pt-2">
-          <header class="header p-2 justify-content-right">
+        <div class='pt-2'>
+          <header class='header p-2 justify-content-right'>
             <h1>Expenses </h1>
-         </header>
-       </div>
+          </header>
+        </div>
         <Row>
           <Col lg={3} md={3} sm={5} className='p-4 m-auto shadow-sm rounded-lg'>
             <h2>Expenses</h2>
