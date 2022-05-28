@@ -1,18 +1,18 @@
-# V39 Bears Budget APP
+# V39 Bears - Wallet Zen
 
 ## About
 
-V39 Bears Budget APP is a budget app enabling users to create a personal financial budget and allow you to add expenses in in different category. 
+Wallet Zen is a budget app enabling users to create a personal financial budget and allow you to add expenses in different category. 
 
 ### Features
 
 - [x] Ability to sign up, log in, and log out
 - [x] Ability to create budgets
-- [x] An expenses form to add money in category
+- [x] An expenses form to add amount in category
 - [x] Ability to create a budget name
 - [x] Drop down budget list 
 - [x] Ability to see expenses on a Doughnut Chart
-- [x] Under or Over Budget
+- [x] Ability to see if the expense are over or under the budget amount
 
 
 #### LIVE LINK
