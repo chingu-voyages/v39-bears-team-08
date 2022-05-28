@@ -95,7 +95,7 @@ const Expenses = () => {
 
     console.log('userDATA in handleSubmit', userData.data.userID);
 
-    fetch('http://localhost:5000/createExpenses', {
+    fetch('https://infinite-reef-87658.herokuapp.com//createExpenses', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

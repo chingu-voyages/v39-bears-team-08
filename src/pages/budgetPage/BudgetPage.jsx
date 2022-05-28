@@ -12,7 +12,7 @@ export default function BudgetPage() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/budgets/${userData.data.userID}`)
+    fetch(`https://infinite-reef-87658.herokuapp.com//budgets/${userData.data.userID}`)
       .then((response) => response.json())
       .then((result) => {
         const budgetsFromDB = result.data;
