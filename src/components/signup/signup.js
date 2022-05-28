@@ -25,7 +25,7 @@ export default function SignUp() {
     console.log('yes form is submitted!!!');
 
     axios
-      .post('https://infinite-reef-87658.herokuapp.com//createUser', {
+      .post('https://infinite-reef-87658.herokuapp.com/createUser', {
         firstName: FirstName.current.value,
         lastName: LastName.current.value,
         email: Email.current.value,

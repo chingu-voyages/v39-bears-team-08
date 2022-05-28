@@ -45,7 +45,7 @@ const NewBudget = () => {
 
     console.log('this is userData from context api:', userData);
 
-    fetch('https://infinite-reef-87658.herokuapp.com//createBudget', {
+    fetch('https://infinite-reef-87658.herokuapp.com/createBudget', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

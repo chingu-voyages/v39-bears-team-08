@@ -40,7 +40,7 @@ const ExpensesChart = ({ props }) => {
 
   useEffect(() => {
     const fetchExpenses = async () => {
-      await fetch(`https://infinite-reef-87658.herokuapp.com//budget/${selectedChart}`, {
+      await fetch(`https://infinite-reef-87658.herokuapp.com/budget/${selectedChart}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ export default function SignInComponent() {
     e.preventDefault();
 
     axios
-      .post("https://infinite-reef-87658.herokuapp.com//login", {
+      .post("https://infinite-reef-87658.herokuapp.com/login", {
         email: email,
         password: password,
       })
