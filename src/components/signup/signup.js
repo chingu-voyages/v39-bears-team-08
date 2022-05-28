@@ -40,7 +40,7 @@ export default function SignUp() {
           email: Email.current.value,
           password: Password.current.value,
         });
-        window.location.replace('/budgetpage');
+        window.location.replace('/');
       })
       .catch((err) => {
         console.log('line 46:',err);
