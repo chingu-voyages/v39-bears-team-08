@@ -25,9 +25,9 @@ export default function BudgetPage() {
   console.log('UserID', userData);
   const loginHandler = () => {
     if (isLoggedIn) {
-      window.location.reload();
-    } else {
       navigate('/');
+    } else {
+      window.location.reload();
     }
   };
 
