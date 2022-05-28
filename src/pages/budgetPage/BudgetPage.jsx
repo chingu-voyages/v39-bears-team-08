@@ -41,7 +41,7 @@ export default function BudgetPage() {
     <div className='budget-page'>
       <header className='header'>
         <div className='left-side'>
-          <h1>Logo</h1>
+          <h1>Wallet Zen</h1>
         </div>
         <div className='right-side'>
           <h2>Welcome </h2>

@@ -50,6 +50,7 @@ export default function SignUp() {
   };
   return (
     <div>
+    <h1 className="text-center">Wallet Zen</h1>
       <Form onSubmit={onformSubmit}>
         <Form.Group as={Row} className='mb-3' controlId='formPlaintextEmail'>
           <Form.Label column sm='2'>

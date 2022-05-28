@@ -2,7 +2,8 @@ import React, { useContext, useState } from "react";
 import { Context } from "../../Context";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 // test login
 // ray@gmail.com
@@ -48,6 +49,7 @@ export default function SignInComponent() {
   };
   return (
     <div>
+      <h1 className="text-center">Wallet Zen</h1>
       <Form onSubmit={onformSubmit}>
         <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
           <Form.Label column sm="2">
@@ -72,6 +74,9 @@ export default function SignInComponent() {
           </Col>
         </Form.Group>
         <Button type="submit">Sign in</Button>
+        <Link to="/createUser">
+        <Button variant='success' className='m-2'>SignUp</Button>
+        </Link>
       </Form>
     </div>
   );
